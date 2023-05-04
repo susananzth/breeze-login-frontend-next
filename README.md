@@ -13,6 +13,7 @@ Agregando perzonalizacion y funcionalidades adicionales como:
 * Cambio de lenguaje entre Español - Inglés.
 * Captura de token de autorización para consultas de autenticación.
 
+👉 Proyecto [Backend](https://github.com/susananzth/laravel-login-backend-api).
 ## Construido con 🛠️
 
 Las herramientas que utilice para crear este proyecto:
