@@ -1,0 +1,10 @@
+{
+    "en": {
+        "login": "Login",
+        "welcome": "Welcome"
+    },
+    "es": {
+        "login": "Iniciar sesión",
+        "welcome": "Bienvenido"
+    }
+}

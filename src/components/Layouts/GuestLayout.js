@@ -4,7 +4,7 @@ const GuestLayout = ({ children }) => {
     return (
         <div>
             <Head>
-                <title>Laravel</title>
+                <title>SusanaNzth</title>
             </Head>
 
             <div className="font-sans text-gray-900 antialiased">

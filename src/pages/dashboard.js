@@ -1,7 +1,31 @@
+import React from 'react'
+import { useAuth } from '@/hooks/auth'
 import AppLayout from '@/components/Layouts/AppLayout'
 import Head from 'next/head'
 
 const Dashboard = () => {
+    const { user } = useAuth({
+        middleware: 'auth',
+        redirectIfAuthenticated: '/login',
+    })
+
+    if (!user) {
+        return (
+            <AppLayout
+                header={
+                    <h2 className="font-semibold text-xl text-gray-800 leading-tight">
+                        Dashboard
+                    </h2>
+                }>
+                <Head>
+                    <title>SusanaNzth - Dashboard</title>
+                </Head>
+
+                <div>Loading...</div>
+            </AppLayout>
+        )
+    }
+
     return (
         <AppLayout
             header={
@@ -11,7 +35,7 @@ const Dashboard = () => {
             }>
 
             <Head>
-                <title>Laravel - Dashboard</title>
+                <title>SusanaNzth - Dashboard</title>
             </Head>
 
             <div className="py-12">
