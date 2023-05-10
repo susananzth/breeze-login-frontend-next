@@ -7,6 +7,7 @@ import Input from '@/components/Input'
 import InputError from '@/components/InputError'
 import Label from '@/components/Label'
 import Link from 'next/link'
+import LinkA from '@/components/LinkA'
 import { useAuth } from '@/hooks/auth'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
@@ -50,7 +51,7 @@ const Login = () => {
             <AuthCard
                 logo={
                     <Link href="/">
-                        <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" />
+                        <ApplicationLogo className="w-20 h-20" />
                     </Link>
                 }>
                 {/* Session Status */}
@@ -103,24 +104,24 @@ const Login = () => {
                                 id="remember_me"
                                 type="checkbox"
                                 name="remember"
-                                className="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                className="rounded border-neutral-300 text-purple-600 shadow-sm focus:border-purple-300 focus:ring focus:ring-purple-200 focus:ring-opacity-50"
                                 onChange={event =>
                                     setShouldRemember(event.target.checked)
                                 }
                             />
 
-                            <span className="ml-2 text-sm text-gray-600">
+                            <span className="ml-2 text-sm text-gray-600 dark:text-neutral-100">
                                 Remember me
                             </span>
                         </label>
                     </div>
 
                     <div className="flex items-center justify-end mt-4">
-                        <Link
+                        <LinkA
                             href="/forgot-password"
-                            className="underline text-sm text-gray-600 hover:text-gray-900">
+                            className="underline text-sm">
                             Forgot your password?
-                        </Link>
+                        </LinkA>
 
                         <Button className="ml-3">Login</Button>
                     </div>

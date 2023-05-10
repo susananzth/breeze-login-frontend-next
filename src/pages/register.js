@@ -5,6 +5,7 @@ import GuestLayout from '@/components/Layouts/GuestLayout'
 import Input from '@/components/Input'
 import InputError from '@/components/InputError'
 import Label from '@/components/Label'
+import LinkA from '@/components/LinkA'
 import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
 import { useState } from 'react'
@@ -119,11 +120,11 @@ const Register = () => {
                     </div>
 
                     <div className="flex items-center justify-end mt-4">
-                        <Link
+                        <LinkA
                             href="/login"
                             className="underline text-sm text-gray-600 hover:text-gray-900">
                             Already registered?
-                        </Link>
+                        </LinkA>
 
                         <Button className="ml-4">Register</Button>
                     </div>

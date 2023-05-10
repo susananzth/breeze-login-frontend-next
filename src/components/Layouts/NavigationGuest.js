@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
 import Brand from '@/components/Brand'
+import LinkA from '@/components/LinkA'
 
 
 const NavBarGuest = ({ ...props }) => {
@@ -13,33 +14,24 @@ const NavBarGuest = ({ ...props }) => {
                 <Brand href="/dashboard" />
                 <div>
                     {user ? (
-                        <Link
+                        <LinkA
                             href="/dashboard"
-                            className="ml-4 text-sm underline transition duration-150 ease-in-out 
-                            text-purple-950 hover:text-purple-900 focus:text-purple-900 
-                            active:text-purple-900 dark:text-purple-200 dark:hover:text-purple-200 
-                            dark:focus:text-purple-200 dark:active:text-purple-200">
+                            className="ml-4 text-sm">
                             Dashboard
-                        </Link>
+                        </LinkA>
                     ) : (
                         <>
-                            <Link
+                            <LinkA
                                 href="/login"
-                                className="text-sm underline transition duration-150 ease-in-out 
-                                text-purple-950 hover:text-purple-900 focus:text-purple-900 
-                                active:text-purple-900 dark:text-purple-200 dark:hover:text-purple-200 
-                                dark:focus:text-purple-200 dark:active:text-purple-200">
+                                className="text-sm">
                                 Login
-                            </Link>
+                            </LinkA>
 
-                            <Link
+                            <LinkA
                                 href="/register"
-                                className="ml-4 text-sm underline transition duration-150 ease-in-out 
-                                text-purple-950 hover:text-purple-900 focus:text-purple-900 
-                                active:text-purple-900 dark:text-purple-200 dark:hover:text-purple-200 
-                                dark:focus:text-purple-200 dark:active:text-purple-200">
+                                className="ml-4 text-sm">
                                 Register
-                            </Link>
+                            </LinkA>
                         </>
                     )}
                 </div>

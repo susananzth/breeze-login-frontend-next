@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import Link from 'next/link'
 import NavBarGuest from '@/components/Layouts/NavigationGuest'
+import LinkA from '@/components/LinkA'
 
 export default function Home() {
 
@@ -9,7 +9,7 @@ export default function Home() {
             <Head>
                 <title>SusanaNzth</title>
             </Head>
-            <div>
+            <div className="bg-wite dark:bg-neutral-700 text-neutral-800 dark:text-neutral-200">
                 <NavBarGuest />
                 
                 <div className="container mx-auto px-4">
@@ -39,9 +39,8 @@ export default function Home() {
                     </ul>
                     <p className="mb-4 mt-0 text-lg leading-relaxed">
                         👉 Proyecto 
-                        <Link href="https://github.com/susananzth/laravel-login-backend-api"
-                        className="text-violet-700 hover:text-violet-500 focus:text-violet-500 
-                        active:text-indigo-500 transition duration-150 ease-in-out pl-1">Backend</Link>
+                        <LinkA href="https://github.com/susananzth/laravel-login-backend-api"
+                        className="pl-1">Backend</LinkA>
                     </p>
                     <h6 className="mb-4 border-b text-2xl leading-tight">
                         Construido con 🛠️
@@ -56,19 +55,14 @@ export default function Home() {
                     </p>
                     <ul className="list-disc list-inside leading-relaxed mb-4 mt-0">
                         <li>Framework de Rect JS: 
-                            <Link href="https://nextjs.org"
-                            className="text-violet-700 hover:text-violet-500 focus:text-violet-500 
-                            active:text-indigo-500 transition duration-150 ease-in-out pl-1">Next.js</Link>.
+                            <LinkA href="https://nextjs.org" className="pl-1">Next.js</LinkA>.
                         </li>
                         <li>Funciones de autenticación de Laravel: 
-                            <Link href="https://laravel.com/docs/10.x/starter-kits#breeze-and-next"
-                            className="text-violet-700 hover:text-violet-500 focus:text-violet-500 
-                            active:text-indigo-500 transition duration-150 ease-in-out pl-1">Breeze</Link>.
+                            <LinkA href="https://laravel.com/docs/10.x/starter-kits#breeze-and-next"
+                            className="pl-1">Breeze</LinkA>.
                         </li>
                         <li>Framework de CSS: 
-                            <Link href="https://tailwindcss.com/"
-                            className="text-violet-700 hover:text-violet-500 focus:text-violet-500 
-                            active:text-indigo-500 transition duration-150 ease-in-out pl-1">Tailwind CSS</Link>.
+                            <LinkA href="https://tailwindcss.com/" className="pl-1">Tailwind CSS</LinkA>.
                         </li>
                     </ul>
                     <h6 className="mb-4 border-b text-2xl leading-tight">
@@ -79,14 +73,10 @@ export default function Home() {
                     </p>
                     <ul className="inline-grid grid-cols-2 gap-4 mb-4 mt-0 leading-relaxed">
                         <li>GitLab:
-                            <Link href="https://gitlab.com/susananzth"
-                            className="text-violet-700 hover:text-violet-500 focus:text-violet-500 
-                            active:text-indigo-500 transition duration-150 ease-in-out pl-1">susananzth</Link>
+                            <LinkA href="https://gitlab.com/susananzth" className="pl-1">susananzth</LinkA>
                         </li>
                         <li>GitHub:
-                            <Link href="https://github.com/susananzth"
-                            className="text-violet-700 hover:text-violet-500 focus:text-violet-500 
-                            active:text-indigo-500 transition duration-150 ease-in-out pl-1">susananzth</Link>
+                            <LinkA href="https://github.com/susananzth" className="pl-1">susananzth</LinkA>
                         </li>
                     </ul>
                 </div>
