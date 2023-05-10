@@ -3,8 +3,8 @@
 Proyecto base de inicio de sesión (login) en **Next JS** del lado **frontend** utilizando **Laravel Breeze** que incluye las siguientes vistas de autenticación:
 * Inicio de sesión.
 * Registro de usuario.
-* Restablecimiento de contraseña
-* Verificación de correo electrónico
+* Restablecimiento de contraseña.
+* Verificación de correo electrónico.
 * Confirmación de contraseña.
 * Página de "perfil" donde el usuario puede actualizar su información.
 

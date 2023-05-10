@@ -3,7 +3,7 @@ import translations from '@/lang/translation.json'
 import axios from '@/lib/axios'
 import Cookies from 'js-cookie'
 import { useEffect, useState } from 'react'
-import Button from '@/components/Button'
+import Button from '@/components/Buttons/ButtonPrimary'
 
 const LanguageSelector = () => {
 

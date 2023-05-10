@@ -1,6 +1,6 @@
 import ApplicationLogo from '@/components/ApplicationLogo'
 import AuthCard from '@/components/AuthCard'
-import Button from '@/components/Button'
+import Button from '@/components/Buttons/ButtonPrimary'
 import GuestLayout from '@/components/Layouts/GuestLayout'
 import Input from '@/components/Input'
 import InputError from '@/components/InputError'

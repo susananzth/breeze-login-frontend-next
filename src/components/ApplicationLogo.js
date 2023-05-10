@@ -1,11 +1,12 @@
 import Image from 'next/image'
 import logo from '@/assets/logo.png'
 
-const ApplicationLogo = props => (
+const ApplicationLogo = ({ className, ...props }) => (
     <Image
-        className="logo"
+        className={className}
         src={logo}
-        alt="Logo de marcación"
+        {...props}
+        alt="Logo de SusanaNzth"
     />
 )
 
