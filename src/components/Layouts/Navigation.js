@@ -16,7 +16,7 @@ const Navigation = ({ user }) => {
 
     const { logout } = useAuth()
 
-    const { language, setLanguage } = useContext(LanguageContext)
+    const { language, setLanguage, t } = useContext(LanguageContext)
 
     const handleLanguageChange = (newLanguage) => {
         setLanguage(newLanguage)
@@ -42,7 +42,7 @@ const Navigation = ({ user }) => {
                             <NavLink
                                 href="/dashboard"
                                 active={router.pathname === '/dashboard'}>
-                                Dashboard
+                                {t('Dashboard')}
                             </NavLink>
                         </div>
                     </div>
@@ -90,7 +90,7 @@ const Navigation = ({ user }) => {
                             }>
                             {/* Authentication */}
                             <DropdownButton onClick={logout}>
-                                Logout
+                                {t('Logout')}
                             </DropdownButton>
                         </Dropdown>
                     </div>
@@ -135,7 +135,7 @@ const Navigation = ({ user }) => {
                         <ResponsiveNavLink
                             href="/dashboard"
                             active={router.pathname === '/dashboard'}>
-                            Dashboard
+                            {t('Dashboard')}
                         </ResponsiveNavLink>
                     </div>
 
@@ -171,7 +171,7 @@ const Navigation = ({ user }) => {
                         <div className="mt-3 space-y-1">
                             {/* Authentication */}
                             <ResponsiveNavButton onClick={logout}>
-                                Logout
+                                {t('Logout')}
                             </ResponsiveNavButton>
                         </div>
                     </div>

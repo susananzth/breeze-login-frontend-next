@@ -1,16 +1,16 @@
+import { useEffect, useState, useContext } from 'react'
+import { useRouter } from 'next/router'
+import Link from 'next/link'
+import LinkA from '@/components/LinkA'
+import { useAuth } from '@/hooks/auth'
+import { LanguageContext } from '@/context/LanguageProvider'
 import ApplicationLogo from '@/components/ApplicationLogo'
 import AuthCard from '@/components/AuthCard'
 import AuthSessionStatus from '@/components/AuthSessionStatus'
 import Button from '@/components/Buttons/ButtonPrimary'
 import GuestLayout from '@/components/Layouts/GuestLayout'
 import Input from '@/components/Input'
-import InputError from '@/components/InputError'
 import Label from '@/components/Label'
-import Link from 'next/link'
-import LinkA from '@/components/LinkA'
-import { useAuth } from '@/hooks/auth'
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
 
 const Login = () => {
     const router = useRouter()
@@ -20,11 +20,12 @@ const Login = () => {
         redirectIfAuthenticated: '/dashboard',
     })
 
+    const { language, setLanguage, t } = useContext(LanguageContext)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [shouldRemember, setShouldRemember] = useState(false)
-    const [errors, setErrors] = useState([])
-    const [status, setStatus] = useState(null)
+    const [errors, setErrors] = useState({})
+    const [status, setStatus] = useState()
 
     useEffect(() => {
         if (router.query.reset?.length > 0 && errors.length === 0) {
@@ -32,7 +33,7 @@ const Login = () => {
         } else {
             setStatus(null)
         }
-    })
+    }, [])
 
     const submitForm = async event => {
         event.preventDefault()
@@ -55,29 +56,28 @@ const Login = () => {
                     </Link>
                 }>
                 {/* Session Status */}
-                <AuthSessionStatus className="mb-4" status={status} />
+                <AuthSessionStatus className="mb-4" status={status} message={errors} />
 
                 <form onSubmit={submitForm}>
                     {/* Email Address */}
                     <div>
-                        <Label htmlFor="email">Email</Label>
+                        <Label htmlFor="email">{t('Email')}</Label>
 
                         <Input
                             id="email"
                             type="email"
+                            name="email"
                             value={email}
                             className="block mt-1 w-full"
                             onChange={event => setEmail(event.target.value)}
                             required
                             autoFocus
                         />
-
-                        <InputError messages={errors.email} className="mt-2" />
                     </div>
 
                     {/* Password */}
                     <div className="mt-4">
-                        <Label htmlFor="password">Password</Label>
+                        <Label htmlFor="password">{t('Password')}</Label>
 
                         <Input
                             id="password"
@@ -87,11 +87,6 @@ const Login = () => {
                             onChange={event => setPassword(event.target.value)}
                             required
                             autoComplete="current-password"
-                        />
-
-                        <InputError
-                            messages={errors.password}
-                            className="mt-2"
                         />
                     </div>
 
@@ -111,7 +106,7 @@ const Login = () => {
                             />
 
                             <span className="ml-2 text-sm text-gray-600 dark:text-neutral-100">
-                                Remember me
+                                {t('Remember me')}
                             </span>
                         </label>
                     </div>
@@ -120,10 +115,10 @@ const Login = () => {
                         <LinkA
                             href="/forgot-password"
                             className="underline text-sm">
-                            Forgot your password?
+                            {t('Forgot your password?')}
                         </LinkA>
 
-                        <Button className="ml-3">Login</Button>
+                        <Button className="ml-3">{t('Login')}</Button>
                     </div>
                 </form>
             </AuthCard>

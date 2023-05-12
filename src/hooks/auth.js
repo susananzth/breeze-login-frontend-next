@@ -20,7 +20,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
             .catch(error => {
                 if (error.response.status !== 409) throw error
 
-                router.push('/verify-email')
+                //router.push('/verify-email')
             })
     })
 
@@ -37,7 +37,12 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
             .catch(error => {
                 if (error.response.status !== 422) throw error
 
-                setErrors(error.response.data.errors)
+                if (typeof(error.response.data.messages) == 'object') {
+                    setErrors(error.response.data.messages)
+                } else {
+                    setErrors(error.response.data.message)
+                }
+                setStatus(error.response.data.status)
             })
     }
 
@@ -53,7 +58,13 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
             .catch(error => {
                 if (error.response.status !== 422) throw error
 
-                setErrors(error.response.data.errors)
+                if (typeof(error.response.data.messages) == 'object') {
+                    let message = Object.values(error.response.data.messages)
+                    setErrors(message)
+                } else {
+                    setErrors(error.response.data.message)
+                }
+                setStatus(error.response.data.status)
             })
     }
 
@@ -65,11 +76,20 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
 
         axios
             .post('/forgot-password', { email })
-            .then(response => setStatus(response.data.status))
+            .then(response => {
+                setStatus('success')
+                setErrors(response.data.status)
+            })
             .catch(error => {
                 if (error.response.status !== 422) throw error
 
-                setErrors(error.response.data.errors)
+                if (typeof(error.response.data.messages) == 'object') {
+                    let message = Object.values(error.response.data.messages)
+                    setErrors(message)
+                } else {
+                    setErrors(error.response.data.message)
+                }
+                setStatus(error.response.data.status)
             })
     }
 
@@ -81,13 +101,22 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
 
         axios
             .post('/reset-password', { token: router.query.token, ...props })
-            .then(response =>
-                router.push('/login?reset=' + btoa(response.data.status)),
-            )
+            .then(response => {
+                setStatus('success')
+                setErrors(response.data.status)
+                router.push('/login?reset=' + btoa(response.data.status))
+
+            })
             .catch(error => {
                 if (error.response.status !== 422) throw error
 
-                setErrors(error.response.data.errors)
+                if (typeof(error.response.data.messages) == 'object') {
+                    let message = Object.values(error.response.data.messages)
+                    setErrors(message)
+                } else {
+                    setErrors(error.response.data.message)
+                }
+                setStatus(error.response.data.status)
             })
     }
 
@@ -108,24 +137,15 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
     }
 
     useEffect(() => {
-        if (!redirectIfAuthenticated) return;
-
-        if (middleware === 'auth' && user == null) {
+        if (middleware === 'guest' && redirectIfAuthenticated && user)
             router.push(redirectIfAuthenticated)
-        }
-        if (middleware === 'guest' && user) {
-            router.push(redirectIfAuthenticated)
-        }
         if (
             window.location.pathname === '/verify-email' &&
             user?.email_verified_at
-        ) {
+        )
             router.push(redirectIfAuthenticated)
-        }
-        if (middleware === 'auth' && error) {
-            logout()
-        }
-    }, [user, error, redirectIfAuthenticated])
+        if (middleware === 'auth' && error) logout()
+    }, [user, error])
 
     return {
         user,

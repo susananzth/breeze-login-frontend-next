@@ -1,8 +1,9 @@
-import React, {useContext} from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Head from 'next/head'
 import { useAuth } from '@/hooks/auth'
 import { LanguageContext } from '@/context/LanguageProvider'
 import AppLayout from '@/components/Layouts/AppLayout'
+import Loader from '@/components/Loader'
 
 const Dashboard = () => {
     const { user } = useAuth({
@@ -10,22 +11,23 @@ const Dashboard = () => {
         redirectIfAuthenticated: '/login',
     })
 
-    const { language, setLanguaje, t } = useContext(LanguageContext)
+    const { language, setLanguage, t } = useContext(LanguageContext)
+    const [isLoading, setIsLoading] = useState(true)
 
-    if (!user) {
+    useEffect(() => {
+        setTimeout(() => {
+            setIsLoading(false)
+        }, 1000)
+    }, [])
+
+    if (!user || isLoading) {
         return (
-            <AppLayout
-                header={
-                    <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                        Dashboard
-                    </h2>
-                }>
+            <div>
                 <Head>
                     <title>SusanaNzth - Dashboard</title>
                 </Head>
-
-                <div>Loading...</div>
-            </AppLayout>
+                <Loader />
+            </div>
         )
     }
 
@@ -33,7 +35,7 @@ const Dashboard = () => {
         <AppLayout
             header={
                 <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    Dashboard
+                    {t('Dashboard')}
                 </h2>
             }>
 

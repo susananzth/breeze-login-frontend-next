@@ -1,3 +1,7 @@
+import { useState, useContext } from 'react'
+import Link from 'next/link'
+import { useAuth } from '@/hooks/auth'
+import { LanguageContext } from '@/context/LanguageProvider'
 import ApplicationLogo from '@/components/ApplicationLogo'
 import AuthCard from '@/components/AuthCard'
 import Button from '@/components/Buttons/ButtonPrimary'
@@ -6,9 +10,6 @@ import Input from '@/components/Input'
 import InputError from '@/components/InputError'
 import Label from '@/components/Label'
 import LinkA from '@/components/LinkA'
-import Link from 'next/link'
-import { useAuth } from '@/hooks/auth'
-import { useState } from 'react'
 
 const Register = () => {
     const { register } = useAuth({
@@ -16,11 +17,12 @@ const Register = () => {
         redirectIfAuthenticated: '/dashboard',
     })
 
+    const { language, setLanguage, t } = useContext(LanguageContext)
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [passwordConfirmation, setPasswordConfirmation] = useState('')
-    const [errors, setErrors] = useState([])
+    const [errors, setErrors] = useState({})
 
     const submitForm = event => {
         event.preventDefault()
@@ -39,13 +41,13 @@ const Register = () => {
             <AuthCard
                 logo={
                     <Link href="/">
-                        <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" />
+                        <ApplicationLogo className="w-20 h-20" />
                     </Link>
                 }>
                 <form onSubmit={submitForm}>
                     {/* Name */}
                     <div>
-                        <Label htmlFor="name">Name</Label>
+                        <Label htmlFor="name">{t('Name')}</Label>
 
                         <Input
                             id="name"
@@ -62,7 +64,7 @@ const Register = () => {
 
                     {/* Email Address */}
                     <div className="mt-4">
-                        <Label htmlFor="email">Email</Label>
+                        <Label htmlFor="email">{t('Email')}</Label>
 
                         <Input
                             id="email"
@@ -78,7 +80,7 @@ const Register = () => {
 
                     {/* Password */}
                     <div className="mt-4">
-                        <Label htmlFor="password">Password</Label>
+                        <Label htmlFor="password">{t('Password')}</Label>
 
                         <Input
                             id="password"
@@ -99,7 +101,7 @@ const Register = () => {
                     {/* Confirm Password */}
                     <div className="mt-4">
                         <Label htmlFor="passwordConfirmation">
-                            Confirm Password
+                            {t('Confirm Password')}
                         </Label>
 
                         <Input
@@ -123,10 +125,10 @@ const Register = () => {
                         <LinkA
                             href="/login"
                             className="underline text-sm text-gray-600 hover:text-gray-900">
-                            Already registered?
+                            {t('Already registered?')}
                         </LinkA>
 
-                        <Button className="ml-4">Register</Button>
+                        <Button className="ml-4">{t('Register')}</Button>
                     </div>
                 </form>
             </AuthCard>

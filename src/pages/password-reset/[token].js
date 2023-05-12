@@ -1,3 +1,8 @@
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import Link from 'next/link'
+import { useAuth } from '@/hooks/auth'
+import { LanguageContext } from '@/context/LanguageProvider'
 import ApplicationLogo from '@/components/ApplicationLogo'
 import AuthCard from '@/components/AuthCard'
 import AuthSessionStatus from '@/components/AuthSessionStatus'
@@ -6,16 +11,13 @@ import GuestLayout from '@/components/Layouts/GuestLayout'
 import Input from '@/components/Input'
 import InputError from '@/components/InputError'
 import Label from '@/components/Label'
-import Link from 'next/link'
-import { useAuth } from '@/hooks/auth'
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
 
 const PasswordReset = () => {
     const router = useRouter()
 
     const { resetPassword } = useAuth({ middleware: 'guest' })
 
+    const { language, setLanguage, t } = useContext(LanguageContext)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [passwordConfirmation, setPasswordConfirmation] = useState('')
@@ -43,16 +45,16 @@ const PasswordReset = () => {
             <AuthCard
                 logo={
                     <Link href="/">
-                        <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" />
+                        <ApplicationLogo className="w-20 h-20" />
                     </Link>
                 }>
                 {/* Session Status */}
-                <AuthSessionStatus className="mb-4" status={status} />
+                <AuthSessionStatus className="mb-4" status={status} message={errors} />
 
                 <form onSubmit={submitForm}>
                     {/* Email Address */}
                     <div>
-                        <Label htmlFor="email">Email</Label>
+                        <Label htmlFor="email">{t('Email')}</Label>
 
                         <Input
                             id="email"
@@ -63,13 +65,11 @@ const PasswordReset = () => {
                             required
                             autoFocus
                         />
-
-                        <InputError messages={errors.email} className="mt-2" />
                     </div>
 
                     {/* Password */}
                     <div className="mt-4">
-                        <Label htmlFor="password">Password</Label>
+                        <Label htmlFor="password">{t('Password')}</Label>
                         <Input
                             id="password"
                             type="password"
@@ -78,17 +78,12 @@ const PasswordReset = () => {
                             onChange={event => setPassword(event.target.value)}
                             required
                         />
-
-                        <InputError
-                            messages={errors.password}
-                            className="mt-2"
-                        />
                     </div>
 
                     {/* Confirm Password */}
                     <div className="mt-4">
                         <Label htmlFor="passwordConfirmation">
-                            Confirm Password
+                            {t('Confirm Password')}
                         </Label>
 
                         <Input
@@ -109,7 +104,7 @@ const PasswordReset = () => {
                     </div>
 
                     <div className="flex items-center justify-end mt-4">
-                        <Button>Reset Password</Button>
+                        <Button>{t('Reset Password')}</Button>
                     </div>
                 </form>
             </AuthCard>

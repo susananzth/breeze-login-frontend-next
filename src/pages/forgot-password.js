@@ -1,14 +1,14 @@
+import  React, { useState, useContext } from 'react'
+import Link from 'next/link'
+import { useAuth } from '@/hooks/auth'
+import { LanguageContext } from '@/context/LanguageProvider'
 import ApplicationLogo from '@/components/ApplicationLogo'
 import AuthCard from '@/components/AuthCard'
 import AuthSessionStatus from '@/components/AuthSessionStatus'
 import Button from '@/components/Buttons/ButtonPrimary'
 import GuestLayout from '@/components/Layouts/GuestLayout'
 import Input from '@/components/Input'
-import InputError from '@/components/InputError'
 import Label from '@/components/Label'
-import Link from 'next/link'
-import { useAuth } from '@/hooks/auth'
-import { useState } from 'react'
 
 const ForgotPassword = () => {
     const { forgotPassword } = useAuth({
@@ -16,9 +16,10 @@ const ForgotPassword = () => {
         redirectIfAuthenticated: '/dashboard',
     })
 
+    const { language, setLanguage, t } = useContext(LanguageContext)
     const [email, setEmail] = useState('')
-    const [errors, setErrors] = useState([])
-    const [status, setStatus] = useState(null)
+    const [errors, setErrors] = useState({})
+    const [status, setStatus] = useState()
 
     const submitForm = event => {
         event.preventDefault()
@@ -31,22 +32,20 @@ const ForgotPassword = () => {
             <AuthCard
                 logo={
                     <Link href="/">
-                        <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" />
+                        <ApplicationLogo className="w-20 h-20" />
                     </Link>
                 }>
                 <div className="mb-4 text-sm text-gray-600">
-                    Forgot your password? No problem. Just let us know your
-                    email address and we will email you a password reset link
-                    that will allow you to choose a new one.
+                    {t('Forgot your password? No problem.')}
                 </div>
 
                 {/* Session Status */}
-                <AuthSessionStatus className="mb-4" status={status} />
+                <AuthSessionStatus className="mb-4" status={status} message={errors} />
 
                 <form onSubmit={submitForm}>
                     {/* Email Address */}
                     <div>
-                        <Label htmlFor="email">Email</Label>
+                        <Label htmlFor="email">{t('Email')}</Label>
                         <Input
                             id="email"
                             type="email"
@@ -57,12 +56,12 @@ const ForgotPassword = () => {
                             required
                             autoFocus
                         />
-
-                        <InputError messages={errors.email} className="mt-2" />
                     </div>
 
                     <div className="flex items-center justify-end mt-4">
-                        <Button>Email Password Reset Link</Button>
+                        <Button>
+                            {t('Email Password Reset Link')}
+                        </Button>
                     </div>
                 </form>
             </AuthCard>
