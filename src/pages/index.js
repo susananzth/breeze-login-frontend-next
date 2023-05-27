@@ -45,11 +45,6 @@ export default function Home() {
                     <h6 className="mb-4 border-b text-2xl leading-tight">
                         Construido con 🛠️
                     </h6>
-                    <ul className="list-disc list-inside leading-relaxed mb-4 mt-0">
-                        <li>Logo y colores representativos de la marca.</li>
-                        <li>Cambio de lenguaje entre Español - Inglés.</li>
-                        <li>Captura de token de autorización para consultas de autenticación.</li>
-                    </ul>
                     <p className="mb-1 mt-0 text-lg leading-relaxed">
                         Las herramientas que utilice para crear este proyecto:
                     </p>
